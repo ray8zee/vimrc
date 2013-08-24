@@ -25,19 +25,16 @@ Bundle 'gmarik/vundle'
 
 " My Bundles here:
 "
-" original repos on github
-"Bundle 'majutsushi/tagbar'
-"Bundle 'altercation/vim-colors-solarized'
+Bundle 'altercation/vim-colors-solarized'
 Bundle 'hsitz/VimOrganizer'
-
-" Github repos of the user 'vim-scripts'
-" => can omit the username part
-"Bundle 'L9'
-"Bundle 'FuzzyFinder'
-
-" non github repos
-"Bundle 'git://git.wincent.com/command-t.git'
-" ...
+Bundle 'wincent/Command-T'
+Bundle 'Rip-Rip/clang_complete'
+Bundle 'scrooloose/nerdtree'
+Bundle 'tomtom/tcomment_vim'
+Bundle 'Lokaltog/vim-easymotion'
+Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-repeat'
+Bundle 'scrooloose/nerdcommenter'
 
 " enable file-type specific plugins (eg. C/C++ code completion)
 filetype plugin indent on     " required!
@@ -46,11 +43,26 @@ filetype plugin indent on     " required!
 " [Vundle.end]
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" map leader
+let mapleader = ","
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" [Tagbar]
+" [CommandT]
 "
-"let g:tagbar_ctags_bin = '/depot/ctag-5.5.4/bin/ctags'
-"let g:tagbar_left = 1
+let g:CommandTCancelMap='<C-x>'
+set wildignore+=~/builds,~/REMOTE_ROOT,~/log
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" [clang_complete]
+"
+let g:clang_library_path = expand("$LLVM_PATH/lib")
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" [NERDTree]
+"
+nnoremap <leader>nt :NERDTreeToggle<CR>
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " [VimOrganizer]
 "
@@ -62,16 +74,22 @@ command! OrgCaptureFile :call org#OpenCaptureFile()
 
 " [Terminal and Gui options]
 "
-"if !has("gui_running")
-"  set term=xterm-color
+if !has("gui_running")
+  set term=xterm-color
+  set background=dark
+  let g:solarized_bold=0
+  colorscheme solarized
+else
 "endif
+  set background=dark
+  set cursorline
+  set colorcolumn=80
+  let g:solarized_bold=1
+  colorscheme solarized
+endif
 "set lines=50 columns=88
 " turn syntax highlighting on
 syntax enable
-"set background=dark
-"colorscheme solarized
-"set cursorline
-"set colorcolumn=80
 
 " set UTF-8 encoding
 set enc=utf-8
@@ -104,9 +122,6 @@ set showmode
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Enhanced keyboard mappings (non-plugin specific)
 "
-
-let mapleader = ","
-
 " jk - Enter normal mode with minimal hand movement
 inoremap <silent>jk <ESC>
 
@@ -168,10 +183,10 @@ nnoremap <silent><C-F12> :call ToggleGuiWithMenu()<CR>
 "inoremap <silent><A-U> <ESC>viwU<ESC>wa
 "
 " "" - quote visual selection
-vnoremap <silent>"" <esc>`<i"<esc>`>a"<esc>
+" vnoremap <silent>"" <esc>`<i"<esc>`>a"<esc>
 
 " (( - parenthesize visual selection
-vnoremap <silent>(( <esc>`<i(<esc>`>a)<esc>
+" vnoremap <silent>(( <esc>`<i(<esc>`>a)<esc>
 
 " Alt+Left/Alt+Right - Rearrange window-tabs
 nnoremap <silent> <A-Left> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
