@@ -35,6 +35,10 @@ Bundle 'Lokaltog/vim-easymotion'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-repeat'
 Bundle 'scrooloose/nerdcommenter'
+Bundle 'kien/ctrlp.vim'
+
+" Vim scripts
+Bundle 'AutoClose'
 
 " enable file-type specific plugins (eg. C/C++ code completion)
 filetype plugin indent on     " required!
@@ -44,6 +48,7 @@ filetype plugin indent on     " required!
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " map leader
+let localleader = ";"
 let mapleader = ","
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -61,12 +66,13 @@ let g:clang_library_path = expand("$LLVM_PATH/lib")
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " [NERDTree]
 "
-nnoremap <leader>nt :NERDTreeToggle<CR>
+nnoremap <leader>N :NERDTreeToggle<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " [VimOrganizer]
 "
 let g:ft_ignore_pat = '\.org'
+"let g:org_command_for_emacsclient = expand("$EMACS_PATH/bin/emacsclient")
 au! BufRead,BufWrite,BufWritePost,BufNewFile *.org
 au  BufEnter *.org call org#SetOrgFileType()
 command! OrgCapture :call org#CaptureBuffer()
